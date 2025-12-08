@@ -1,0 +1,336 @@
+
+
+/* ====== 1. Base & Reset ====== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Light mode (default) */
+  --bg-color: #fafafa;
+  --text-color: #1e293b;
+  --heading-color: #0f172a;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --primary: #4f46e5; /* indigo-600 */
+  --primary-hover: #4338ca;
+  --success: #10b981;
+  --error: #ef4444;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius: 12px;
+  --transition: all 0.2s ease;
+}
+
+/* ====== 2. Typography & Layout ====== */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ====== 3. Skip Link ====== */
+.skip-link {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.skip-link:focus {
+  opacity: 1;
+  transform: translateY(0);
+  outline: 2px solid var(--primary);
+}
+
+/* ====== 4. Header ====== */
+header {
+  background-color: var(--card-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding-block: 1rem;
+}
+.header-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--heading-color);
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+nav a:hover,
+nav a:focus {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ====== 5. Main Content ====== */
+main {
+  padding-block: 2rem;
+}
+
+/* Section spacing */
+section {
+  margin-block: 3rem;
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ====== 6. Search Form ====== */
+#search-section {
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--card-bg);
+  transition: var(--transition);
+}
+#search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+button:hover,
+button:focus {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.error-message {
+  color: var(--error);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ====== 7. Results Section ====== */
+#results-section {
+  padding-inline: 1rem;
+}
+
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Empty / Loading / Error States */
+.empty-state,
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  grid-column: 1 / -1;
+}
+
+.error-state {
+  border-left: 4px solid var(--error);
+}
+
+/* ====== 8. Recipe Card (Structure Only — Will Be Populated in Week 4) ====== */
+/* Commented card is just for structure — no styles applied yet */
+/* Real cards will use this same class in Week 4 */
+
+/* Example (uncomment in Week 4 when cards are added):
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+.recipe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.recipe-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.recipe-content {
+  padding: 1.25rem;
+}
+.recipe-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: var(--heading-color);
+}
+.recipe-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+.recipe-summary {
+  color: #475569;
+  margin: 0 0 1rem;
+}
+.recipe-link {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+.recipe-link:hover {
+  text-decoration: underline;
+}
+*/
+
+/* ====== 9. Footer ====== */
+footer {
+  background-color: var(--heading-color);
+  color: #cbd5e1;
+  padding-block: 2rem;
+}
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+}
+footer p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+footer nav ul {
+  justify-content: center;
+}
+footer a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: var(--transition);
+}
+footer a:hover,
+footer a:focus {
+  color: #e2e8f0;
+  text-decoration: underline;
+}
+
+/* ====== 10. Responsive Design — Media Queries ====== */
+
+/* Tablet */
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 2rem;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 2.25rem;
+  }
+  .input-wrapper {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .header-container {
+    padding-inline: 0;
+  }
+  .recipe-list {
+    gap: 2rem;
+  }
+  footer .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
