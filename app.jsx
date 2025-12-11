@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import './style.css';
 import Header from './components/Header';
 import SearchSection from './components/SearchSection';
 import ResultsSection from './components/ResultsSection';
