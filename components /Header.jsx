@@ -4,7 +4,7 @@ export default function Header({ theme, toggleTheme }) {
   return (
     <header className="site-header" role="banner">
       <div className="container">
-        <h1 className="site-title">🍳 Recipe Finder</h1>
+        <h1 className="site-title"> Recipe Finder</h1>
         <button
           className="theme-toggle"
           aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
