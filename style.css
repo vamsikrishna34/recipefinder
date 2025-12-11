@@ -235,7 +235,7 @@ body {
   margin-inline: auto;
 }
 
-/* ===== Results Section ===== */
+
 .results-section {
   margin-top: 3.5rem;
 }
@@ -247,7 +247,7 @@ body {
   margin-top: 2rem;
 }
 
-/* ===== Modern Recipe Card (Ready for Week 4) ===== */
+
 .recipe-card {
   background: var(--surface);
   border-radius: var(--radius);
@@ -327,7 +327,7 @@ body {
   transform: translateX(4px);
 }
 
-/* ===== Result States (Empty/Loading/Error) ===== */
+
 .result-card {
   background: var(--surface);
   border-radius: var(--radius);
@@ -371,7 +371,7 @@ body {
   background: rgba(239, 68, 68, 0.03);
 }
 
-/* ===== Footer ===== */
+
 .site-footer {
   background: var(--heading);
   color: #cbd5e1;
