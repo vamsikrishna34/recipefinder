@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 
-export default function SearchSection() {
-  const [query, setQuery] = useState('');
+export default function SearchSection({ onSearch, currentQuery }) {
+  const [query, setQuery] = useState(currentQuery || '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (query.trim().length < 2) {
-      console.warn('Query too short');
-      return;
-    }
-    console.log('Search submitted:', query);
+    if (query.trim().length < 2) return;
+    onSearch(query.trim());
+  };
+
+  const handleClear = () => {
+    setQuery('');
+    onSearch('');
   };
 
   return (
@@ -29,6 +31,16 @@ export default function SearchSection() {
             placeholder="e.g., creamy mushroom pasta, vegan cookies"
             aria-describedby="search-hint"
           />
+          {query && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className="clear-button"
+              aria-label="Clear search"
+            >
+              ✕
+            </button>
+          )}
           <button type="submit" className="search-button" aria-label="Search recipes">
             Search
           </button>
