@@ -31,7 +31,7 @@
   outline: 2px solid #4f46e5;
 }
 
-/* ===== Theme Variables ===== */
+
 :root {
   /* Light mode (default) */
   --bg: #fafafa;
@@ -63,7 +63,7 @@
   --shadow-hover: 0 16px 24px -8px rgba(0, 0, 0, 0.35);
 }
 
-/* ===== Base Styles ===== */
+
 *,
 *::before,
 *::after {
@@ -86,7 +86,7 @@ body {
   padding-inline: 1.5rem;
 }
 
-/* ===== Typography — Modern Hierarchy ===== */
+
 .site-title {
   font-size: 2rem;
   font-weight: 800;
@@ -118,7 +118,7 @@ body {
   border-radius: 2px;
 }
 
-/* ===== Header ===== */
+
 .site-header {
   background-color: var(--surface);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -163,7 +163,7 @@ body {
   content: '🌙';
 }
 
-/* ===== Search Section ===== */
+
 .search-section {
   max-width: 720px;
   margin-inline: auto;
@@ -422,7 +422,7 @@ body {
   width: 100%;
 }
 
-/* ===== Responsive Design ===== */
+
 @media (min-width: 768px) {
   .container {
     padding-inline: 2.5rem;
@@ -450,7 +450,7 @@ body {
   }
 }
 
-/* Reduce motion for accessibility */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -463,4 +463,17 @@ body {
   .search-button:hover {
     transform: none !important;
   }
+
+  .clear-button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: center;
+}
+.clear-button:hover { color: var(--error); }
+
 }
