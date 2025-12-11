@@ -1,6 +1,5 @@
 
 
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -24,7 +23,7 @@
   z-index: 1000;
   opacity: 0;
   transform: translateY(-100%);
-  transition: 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
 }
 .skip-link:focus {
   opacity: 1;
@@ -32,7 +31,7 @@
   outline: 2px solid #4f46e5;
 }
 
-
+/* ===== Theme Variables ===== */
 :root {
   /* Light mode (default) */
   --bg: #fafafa;
@@ -45,13 +44,12 @@
   --primary-hover: #4338ca;
   --success: #10b981;
   --error: #ef4444;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --radius: 12px;
-  --transition: all 0.25s ease;
+  --shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 10px 20px -5px rgba(0, 0, 0, 0.12);
+  --radius: 16px;
+  --transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Dark mode overrides */
 .dark {
   --bg: #0f172a;
   --surface: #1e293b;
@@ -61,11 +59,11 @@
   --border: #334155;
   --primary: #818cf8;
   --primary-hover: #6366f1;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  --shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 16px 24px -8px rgba(0, 0, 0, 0.35);
 }
 
-/* ===== 3. Base Styles ===== */
+/* ===== Base Styles ===== */
 *,
 *::before,
 *::after {
@@ -74,44 +72,61 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
   line-height: 1.6;
   background-color: var(--bg);
   color: var(--text);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.35s, color 0.35s;
 }
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin-inline: auto;
   padding-inline: 1.5rem;
 }
 
-/* ===== 4. Typography ===== */
+/* ===== Typography — Modern Hierarchy ===== */
 .site-title {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 800;
+  letter-spacing: -0.5px;
   margin: 0;
   color: var(--heading);
+  background: linear-gradient(90deg, var(--heading), var(--primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 2.25rem;
+  font-weight: 800;
   color: var(--heading);
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 3rem 0 2.5rem;
+  letter-spacing: -0.75px;
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  margin: 0.75rem auto;
+  border-radius: 2px;
 }
 
-
+/* ===== Header ===== */
 .site-header {
   background-color: var(--surface);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding-block: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding-block: 1.25rem;
   position: sticky;
   top: 0;
   z-index: 100;
+  backdrop-filter: blur(8px);
 }
 
 .site-header .container {
@@ -123,10 +138,10 @@ body {
 .theme-toggle {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -136,10 +151,11 @@ body {
 .theme-toggle:hover,
 .theme-toggle:focus {
   background-color: var(--border);
+  transform: scale(1.05);
   outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
-/* Theme icon (sun/moon) */
 .theme-icon::before {
   content: '☀️';
 }
@@ -147,102 +163,197 @@ body {
   content: '🌙';
 }
 
-
+/* ===== Search Section ===== */
 .search-section {
-  max-width: 700px;
+  max-width: 720px;
   margin-inline: auto;
 }
 
 .form-label {
   display: block;
-  font-weight: 600;
-  font-size: 1.125rem;
-  margin-bottom: 0.75rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
   color: var(--heading);
+  text-align: center;
 }
 
 .input-group {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .search-input {
   flex: 1;
-  min-width: 200px;
-  padding: 0.875rem 1.25rem;
-  font-size: 1rem;
+  min-width: 240px;
+  padding: 1rem 1.5rem;
+  font-size: 1.05rem;
   border: 2px solid var(--border);
   border-radius: var(--radius);
   background-color: var(--surface);
   color: var(--text);
   transition: var(--transition);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 .search-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
 }
 
 .search-button {
-  padding: 0.875rem 1.75rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: var(--primary);
+  padding: 1rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), #4338ca);
   color: white;
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 .search-button:hover,
 .search-button:focus {
-  background-color: var(--primary-hover);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--primary-hover), #3730a3);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 .search-button:focus {
   outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  outline-offset: 4px;
 }
 
 .hint-text {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  margin: 0.5rem 0 0;
+  margin: 1rem 0 0;
   text-align: center;
+  max-width: 500px;
+  margin-inline: auto;
 }
 
-
+/* ===== Results Section ===== */
 .results-section {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .recipe-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.75rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-/* Result Cards (empty, loading, error) */
+/* ===== Modern Recipe Card (Ready for Week 4) ===== */
+.recipe-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.recipe-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.recipe-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+}
+
+.recipe-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-content h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--heading);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.recipe-meta span::before {
+  content: '•';
+  margin: 0 0.5rem;
+  color: var(--border);
+}
+.recipe-meta span:first-child::before {
+  content: '';
+  margin: 0;
+}
+
+.recipe-summary {
+  color: var(--text-secondary);
+  margin: 0 0 1.25rem;
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.recipe-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: var(--transition);
+}
+.recipe-link:hover {
+  color: var(--primary-hover);
+  transform: translateX(4px);
+}
+
+/* ===== Result States (Empty/Loading/Error) ===== */
 .result-card {
   background: var(--surface);
   border-radius: var(--radius);
-  padding: 2rem;
+  padding: 2.5rem;
   text-align: center;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
 }
 
 .result-card h3 {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--heading);
-  margin: 0 0 0.75rem;
+  margin: 0 0 1rem;
 }
 
 .result-card p {
   margin: 0;
   color: var(--text-secondary);
+  max-width: 500px;
+  line-height: 1.6;
 }
 
 .empty-state {
@@ -251,61 +362,76 @@ body {
 
 .loading-state {
   grid-column: 1 / -1;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .error-state {
   grid-column: 1 / -1;
   border-left: 4px solid var(--error);
-  background: rgba(239, 68, 68, 0.05);
+  background: rgba(239, 68, 68, 0.03);
 }
 
-
+/* ===== Footer ===== */
 .site-footer {
-  background-color: var(--heading);
+  background: var(--heading);
   color: #cbd5e1;
-  padding: 2rem 0;
-  margin-top: 4rem;
+  padding: 3rem 0 2rem;
+  margin-top: 5rem;
+  border-top: 1px solid var(--border);
 }
 
 .site-footer .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   text-align: center;
 }
 
 .footer-nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer-link {
   color: #94a3b8;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  font-weight: 500;
   transition: var(--transition);
+  position: relative;
+}
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #e2e8f0;
+  transition: width 0.3s;
 }
 .footer-link:hover,
 .footer-link:focus {
   color: #e2e8f0;
-  text-decoration: underline;
+}
+.footer-link:hover::after,
+.footer-link:focus::after {
+  width: 100%;
 }
 
-
-
-/* Tablet */
+/* ===== Responsive Design ===== */
 @media (min-width: 768px) {
   .container {
-    padding-inline: 2rem;
+    padding-inline: 2.5rem;
   }
   .site-title {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
   }
   .section-title {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
   }
   .input-group {
     flex-wrap: nowrap;
@@ -317,9 +443,24 @@ body {
   }
 }
 
-/* Desktop */
 @media (min-width: 1024px) {
   .recipe-grid {
-    gap: 2rem;
+    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-delay: 0ms !important;
+    transition-duration: 0ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .recipe-card:hover,
+  .search-button:hover {
+    transform: none !important;
   }
 }

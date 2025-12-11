@@ -6,12 +6,10 @@ export default function SearchSection() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim().length < 2) {
-      // In Week 4, you’ll trigger search here
       console.warn('Query too short');
       return;
     }
     console.log('Search submitted:', query);
-    // Week 4: dispatch search action / API call
   };
 
   return (
