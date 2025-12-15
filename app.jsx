@@ -1,16 +1,18 @@
+// src/App.jsx
 import React, { useState, useEffect } from 'react';
-import './style.css';
+import { useRecipe } from './context/RecipeContext';
 import Header from './components/Header';
 import SearchSection from './components/SearchSection';
+import FilterSection from './components/FilterSection'; 
 import ResultsSection from './components/ResultsSection';
 import Footer from './components/Footer';
 
 function App() {
+  const { state } = useRecipe();
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
     return saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   });
-  const [query, setQuery] = useState('');
 
   useEffect(() => {
     document.body.className = theme;
@@ -26,8 +28,12 @@ function App() {
       <Header theme={theme} toggleTheme={toggleTheme} />
       <main id="main-content" className="main-content" role="main">
         <div className="container">
-          <SearchSection onSearch={setQuery} currentQuery={query} />
-          <ResultsSection query={query} />
+          <SearchSection />
+          <FilterSection /> {/* ← Inserted here */}
+          <ResultsSection 
+            query={state.query} 
+            filters={state.filters} 
+          />
         </div>
       </main>
       <Footer />
