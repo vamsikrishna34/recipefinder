@@ -51,4 +51,7 @@ export default function SearchSection({ onSearch, currentQuery }) {
       </form>
     </section>
   );
+
+
+
 }
